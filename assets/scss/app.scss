@@ -1,0 +1,21 @@
+$primary: #153770 !default;
+$secondary: #454853 !default;
+
+/* MIXINS */
+@import "mixins";
+
+/* BOOTSTRAP */
+@import "~bootstrap/scss/bootstrap.scss";
+
+/* FONTAWESOME */
+$fa-font-path: "/dist/fonts/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+
+/* TOASTR */
+@import "~toastr/build/toastr.css";
+
+@import "styles/form-signin.scss";
+@import "styles/main.scss";

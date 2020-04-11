@@ -1,0 +1,72 @@
+version: "3"
+
+services:
+
+  # ------> mailhog ------>
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    restart: 'on-failure'
+    ports:
+      - 1025:1025
+      - 8025:8025
+  # <------ mailhog <------
+
+  # ------> adminer ------>
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: 'on-failure'
+    environment:
+      ADMINER_PLUGINS: tables-filter tinymce table-structure
+      ADMINER_DESIGN: pepa-linha
+    ports:
+      - 8080:8080
+  # <------ adminer <------
+
+  # ------> mysql ------>
+  mysql:
+    container_name: mysql
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ../volumes/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: mydatabase
+      MYSQL_ROOT_PASSWORD: mydatabase
+      MYSQL_USER: mydatabase
+      MYSQL_PASSWORD: mydatabase
+  # <------ mysql <------
+
+  # ------> assets ------>
+  assets:
+    container_name: assets
+    build: ./assets
+    image: whoami/assets
+    volumes:
+      - ../assets:/assets
+      - ../package.json:/package.json
+      - ../public/dist:/public/dist
+      - ../yarn.lock:/yarn.lock
+      - ../webpack:/webpack
+      - ../node_modules:/node_modules
+  # <------ assets <------
+
+  # ------> apache ------>
+  apache:
+    container_name: apache
+    build: ./apache
+    image: whoami/apache
+    restart: 'on-failure'
+    working_dir: /www
+    ports:
+      - 80:80
+    volumes:
+      - ../:/www
+      - ../vendor:/www/vendor
+      - ./apache/conf/apache2:/etc/apache2:cached
+      - ./apache/conf/php7/php.ini:/etc/php7/php.ini:cached
+# <------ apache <------

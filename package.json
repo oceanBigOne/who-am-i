@@ -1,0 +1,49 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "description": "Assets module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "npm run test -- --watch",
+    "compile": "./node_modules/.bin/webpack --mode=development --config=webpack/webpack.config.dev.js",
+    "build": "./node_modules/.bin/webpack --mode=production --config=webpack/webpack.config.prod.js",
+    "watch": "./node_modules/.bin/webpack --mode=development --config=webpack/webpack.config.dev.js --watch"
+  },
+  "keywords": [],
+  "author": "Clement GARROT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oceanBigOne/who-am-i"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "@fortawesome/fontawesome-free": "^5.10.0",
+    "@types/react": "^16.9.14",
+    "babel-loader": "^8.0.4",
+    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "toastr": "^2.1.4"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-react": "^7.17.0",
+    "file-loader": "^5.0.2",
+    "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "prettier": "^1.19.1",
+    "sass": "^1.23.7",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
+    "ttag-cli": "^1.7.17",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  }
+}

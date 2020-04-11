@@ -1,0 +1,79 @@
+@mixin appearance($value: none) {
+  appearance: $value;
+  -moz-appearance: $value;
+  -ms-progress-appearance: $value;
+  -webkit-appearance: $value;
+}
+
+@mixin border-radius($top: 50px, $right: 50px, $bottom: 50px, $left: 50px) {
+  -webkit-border-radius: $top $right $bottom $left;
+  -moz-border-radius: $top $right $bottom $left;
+  -ms-border-radius: $top $right $bottom $left;
+  border-radius: $top $right $bottom $left;
+}
+
+@mixin shadow($value: 0 1px 2px 0 #c2c2c2) {
+  box-shadow: $value;
+  //box-shadow: -1px -1px 5px 0px rgba(0, 0, 0, 0.14), 1px 3px 5px 1px rgba(0, 0, 0, 0.12), 1px 2px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+@mixin transition($property: all, $time: 500ms) {
+  -webkit-transition: $property $time;
+  -moz-transition: $property $time;
+  -ms-transition: $property $time;
+  -o-transition: $property $time;
+  transition: $property $time;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@mixin spin($time: 500ms) {
+  -webkit-animation: spin $time linear infinite;
+  -moz-animation: spin $time linear infinite;
+  -ms-animation: spin $time linear infinite;
+  -o-animation: spin $time linear infinite;
+  animation: spin $time linear infinite;
+}
+
+@keyframes zoom {
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@mixin zoom($time: 500ms) {
+  -webkit-animation: zoom $time linear;
+  -moz-animation: zoom $time linear;
+  -ms-animation: zoom $time linear;
+  -o-animation: zoom $time linear;
+  animation: zoom $time linear;
+}
