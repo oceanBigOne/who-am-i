@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Traits\DeletedTrait;
 use App\Traits\TimestampableTrait;
 use App\Traits\UniqueIdTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +15,16 @@ class Character
 {
     use TimestampableTrait;
     use UniqueIdTrait;
+    use DeletedTrait;
+
+    const NAMES = [
+        'Bruce Willis',
+        'Calamity Jane',
+        'Spiderman',
+        'Marie Curie',
+        'Mickey',
+        'Lara Croft',
+    ];
 
     /**
      * @ORM\Id()
