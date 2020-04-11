@@ -17,4 +17,34 @@ class SitePageController extends AbstractController
         ]);
     }
 
+    /**
+     * CreateGame Page
+     * @Route("/create-game", name="create_game")
+     */
+    public function createGame()
+    {
+        return $this->render('create-game/index.html.twig', [
+        ]);
+    }
+
+    /**
+     * JoinGame Page
+     * @Route("/join-game", name="join_game")
+     */
+    public function joinGame()
+    {
+        return $this->render('join-game/index.html.twig', [
+        ]);
+    }
+
+    /**
+     * JoinGame Page
+     * @Route("/rules", name="rules")
+     */
+    public function rules()
+    {
+        return $this->render('rules/index.html.twig', [
+        ]);
+    }
+
 }
