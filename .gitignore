@@ -1,6 +1,7 @@
 /.idea/
 /node_modules/
 /public/dist/
+/volumes/
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
