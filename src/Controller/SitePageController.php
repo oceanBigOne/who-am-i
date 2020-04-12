@@ -143,4 +143,29 @@ class SitePageController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Reset session (for dev only)
+     * @Route("/reset", name="session_reset")
+     * @param GameService $gameService
+     * @param SessionService $session
+     * @return Response
+     * @throws \Exception
+     */
+    public function reset(GameService $gameService, SessionService $session)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $playerRepo= $em->getRepository(Player::class);
+        $player=null;
+        if(!is_null($session->get("playerUniqueId")) ){
+            $player=$playerRepo->findOneBy(["uniqueId"=>$session->get("playerUniqueId")]);
+            $em->remove($player);
+            $em->flush();
+        }
+
+        $session->set("playerUniqueId",null);
+        $session->set("gameUniqueId",null);
+        return $this->redirectToRoute('home');
+    }
+
 }
