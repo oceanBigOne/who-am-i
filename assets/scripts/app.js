@@ -22,4 +22,9 @@ $(document).ready(function() {
     $(".flash-message").each(function() {
         toastr[$(this).data("type")]($(this).html());
     });
+
+    //keep session alive every 2 minutes
+    setInterval(function(){
+        fetch("/").done();
+    },60000*2);
 });

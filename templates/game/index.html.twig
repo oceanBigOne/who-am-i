@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container h-100">
+    <div class="container">
 
-            <div class="row">
+            <div class="row mb-1">
                 <div class="col-12 col-md-6 col-lg-4 m-auto text-center">
                     <h4>JOUEURS</h4>
                 </div>
             </div>
-        <div class="row m-1">
+        <div class="row mb-4">
             <div class="col-12 col-md-6 col-lg-4 m-auto text-center">
-                <a href="{{ path('game',{uniqueId:session.get("gameUniqueId")})}}" class="btn btn-success m-auto">Refresh</a>
+                <a href="{{ path('game',{uniqueId:session.get("gameUniqueId")})}}" class="btn btn-success m-auto"><i class="fas fa-sync"></i></a>
             </div>
         </div>
-        <div class="row m-4">
+        <div class="row mb-4">
             {% if game is not null %}
                 {%for player in game.players %}
                     <div class="col-12 col-md-6 col-lg-4 mb-2">
-                        <div class="card card-primary">
+                        <div class="card card-primary w-100">
                             <div class="card-header  {% if player.uniqueId == session.get("playerUniqueId") %}bg-secondary{% else %}bg-primary{% endif %} text-white">
-                                {{ player.name }}
+                                <i class="fas fa-user-alt mr-2"></i>{{ player.name }}
                             </div>
                             <div class="card-content p-4">
                                 {% if player.uniqueId == session.get("playerUniqueId") %}
@@ -33,7 +33,7 @@
                 {% endfor %}
             {% endif %}
         </div>
-            <div class="row mt-1">
+            <div class="row ">
                 <div class="col-12 col-md-6 col-lg-4 m-auto">
                     <a href="{{ path('home') }}" class="btn btn-primary btn-block">Accueil</a>
                 </div>
