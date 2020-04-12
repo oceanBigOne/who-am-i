@@ -9,6 +9,7 @@
     </head>
     <body class="h-100">
         {% block body %}{% endblock %}
+        {% include "flash-message.html.twig" %}
         {% block javascripts %}
             <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
             <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>

@@ -10,14 +10,16 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 m-auto">
-                    <a href="{{ path('create_game') }}" class="btn btn-primary btn-block">Créer une partie</a>
+                    <a href="{{ path('game') }}" class="btn btn-primary btn-block">Créer une nouvelle partie</a>
                 </div>
             </div>
+        {% if game is not null %}
             <div class="row mt-1">
                 <div class="col-12 col-md-6 col-lg-4 m-auto">
-                    <a href="{{ path('join_game') }}" class="btn btn-primary btn-block">Rejoindre une partie</a>
+                    <a href="{{ path('game', {"uniqueId":game.uniqueId}) }}" class="btn btn-success btn-block">Rejoindre ma partie</a>
                 </div>
             </div>
+        {% endif %}
         <div class="row mt-1">
             <div class="col-12 col-md-6 col-lg-4 m-auto">
                 <a href="{{ path('rules') }}" class="btn btn-primary btn-block">Règles du jeu</a>

@@ -1,0 +1,74 @@
+.flash-message {
+  display: none;
+}
+#toast-container > div {
+  -moz-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=1);
+  filter: alpha(opacity=1);
+}
+
+#toast-container > .toast-info {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=") !important;
+}
+
+#toast-container > .toast-error,
+#toast-container > .toast-success,
+#toast-container > .toast-info,
+#toast-container > .toast-warning {
+  background-image: none !important;
+}
+
+#toast-container > .toast-error:before {
+  content: "\f071";
+  font-size: 16px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  float: left;
+  margin-left: -30px;
+}
+
+#toast-container > .toast-success:before {
+  content: "\f00c";
+  font-size: 16px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  float: left;
+  margin-left: -30px;
+}
+
+#toast-container > .toast-info:before {
+  content: "\f05a";
+  font-size: 16px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  float: left;
+  margin-left: -30px;
+}
+
+#toast-container > .toast-warning:before {
+  content: "\f071";
+  font-size: 16px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  float: left;
+  margin-left: -30px;
+}
+
+.toast {
+  background-color: $black;
+}
+.toast-success {
+  background-color: $success;
+}
+.toast-error {
+  background-color: $danger;
+}
+.toast-info {
+  background-color: $info;
+}
+.toast-warning {
+  background-color: $warning;
+}

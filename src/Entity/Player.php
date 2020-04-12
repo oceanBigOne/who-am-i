@@ -27,11 +27,6 @@ class Player
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $secretKey;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Character")
      */
     private $affectedCharacter;
@@ -63,18 +58,6 @@ class Player
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSecretKey(): ?string
-    {
-        return $this->secretKey;
-    }
-
-    public function setSecretKey(string $secretKey): self
-    {
-        $this->secretKey = $secretKey;
 
         return $this;
     }
