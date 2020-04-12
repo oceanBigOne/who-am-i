@@ -1,21 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12">
-                <h4>Création de partie</h4>
+    <div class="container h-100">
+
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 m-auto text-center">
+                    <h4>JOUEURS</h4>
+                </div>
             </div>
+        <div class="row m-4">
+            {% if game is not null %}
+                {%for player in game.players %}
+                    <div class="col-12 col-md-6 col-lg-4 mb-2">
+                        <div class="card card-primary">
+                            <div class="card-header bg-primary text-white">
+                                {{ player.name }}
+                            </div>
+                            <div class="card-content p-4">
+                                {% if player.uniqueId == session.get("playerUniqueId") %}
+                                    <em>Mais qui êtes vous ?</em>
+                                {% else %}
+                                    {{ player.affectedCharacter.name }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
-        <div class="row">
-            <div class="col-12">
-                Vous venez de créer une nouvelle partie
+            <div class="row mt-1">
+                <div class="col-12 col-md-6 col-lg-4 m-auto">
+                    <a href="{{ path('home') }}" class="btn btn-primary btn-block">Accueil</a>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="{{ path('home') }}" class="btn btn-secondary">Retour</a>
-            </div>
-        </div>
+
     </div>
+
 {% endblock %}

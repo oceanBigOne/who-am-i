@@ -5,11 +5,13 @@ namespace App\Entity;
 use App\Traits\TimestampableTrait;
 use App\Traits\UniqueIdTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
  */
-class Player
+class Player extends AbstractType
 {
     use TimestampableTrait;
     use UniqueIdTrait;
@@ -23,6 +25,8 @@ class Player
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez saisir un nom")
+     *
      */
     private $name;
 

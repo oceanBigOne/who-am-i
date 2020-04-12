@@ -4,9 +4,27 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <h4>Saisissez votre nom de joueur :</h4>
+                <h4>Inscription</h4>
             </div>
         </div>
+        {{ form_start(form, {'attr':{'novalidate': 'novalidate'},'action': path('player'), 'method': 'post'}) }}
+        <div class="row ">
+            <div class="col-12">
+                <label for="{{ form.name.vars.id }}">Joueur :</label>
+                {{ form_widget(form.name, {'attr': {'class': (form.name.vars.errors[0].message is defined)?'is-invalid form-control':'form-control','placeholder': "Votre nom de joueur"}}) }}
+                {% if form.name.vars.errors[0] is defined %}
+                    <div class="invalid-feedback">
+                        {{ form.name.vars.errors[0].message ??'' }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button type="submit"  class="btn btn-success">Valider</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
         <div class="row">
             <div class="col-12">
                 <a href="{{ path('home') }}" class="btn btn-secondary">Retour</a>

@@ -19,6 +19,15 @@ class CharacterRepository extends ServiceEntityRepository
         parent::__construct($registry, Character::class);
     }
 
+    public function findOneByRand()
+    {
+
+            return $this->getEntityManager()
+                ->createQuery(
+                    "SELECT c, RAND() as HIDDEN rand FROM App\Entity\Character c ORDER BY rand")
+                ->setMaxResults(1)->getOneOrNullResult();
+
+    }
     // /**
     //  * @return Character[] Returns an array of Character objects
     //  */
