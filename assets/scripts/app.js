@@ -24,7 +24,7 @@ $(document).ready(function() {
     });
 
     window.onbeforeunload = function(){
-        if($('#exitGame').length()>0){
+        if($('#gamePage').length()>0){
             fetch("/exit").done();
         }
 

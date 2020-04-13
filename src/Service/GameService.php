@@ -75,12 +75,30 @@ class GameService
      */
     public function getGame(?string $uniqueId=null):?Game{
         $game=null;
+        $oldPlayer=$this->getCurrentPlayer();
         if(!is_null($uniqueId)){
             $gameRepo= $this->em->getRepository(Game::class);
             /**@var Game $game **/
             $game = $gameRepo->findOneBy(["uniqueId"=>$uniqueId]);
             if(!is_null($game)) {
                 $this->session->set("gameUniqueId", $game->getUniqueId());
+                //if player isn't in this game, then QUIT other game and join this game
+                if(!is_null($oldPlayer)){
+                    $oldGame=$oldPlayer->getGame();
+                    if(!is_null($oldGame)) {
+                        if ($oldGame->getUniqueId() != $game->getUniqueId()) {
+                            $oldPlayer->setGame($game);
+                            //affect character
+                            $charactersRepo = $this->em->getRepository(Character::class);
+                            /**@var Character $character * */
+                            $character = $charactersRepo->findOneByRand($game);
+                            $oldPlayer->setAffectedCharacter($character);
+                            $this->em->persist($oldPlayer);
+                            $this->em->flush();
+                        }
+                    }
+                }
+
             }
         }
         return $game;
