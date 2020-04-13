@@ -19,12 +19,13 @@
                     <a href="{{ path('game', {"uniqueId":game.uniqueId}) }}" class="btn btn-success btn-block">Rejoindre ma partie</a>
                 </div>
             </div>
-        {% endif %}
-        <div class="row mt-1">
-            <div class="col-12 col-md-6 col-lg-4 m-auto">
-                <a href="{{ path('session_reset') }}" class="btn btn-secondary btn-block">Effacer ma session</a>
+            <div class="row mt-1">
+                <div class="col-12 col-md-6 col-lg-4 m-auto">
+                    <a href="{{ path('exit') }}" class="btn btn-secondary btn-block">Quitter ma partie</a>
+                </div>
             </div>
-        </div>
+        {% endif %}
+
         </div>
     </div>
 

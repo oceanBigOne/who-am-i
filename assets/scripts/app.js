@@ -23,6 +23,13 @@ $(document).ready(function() {
         toastr[$(this).data("type")]($(this).html());
     });
 
+    window.onbeforeunload = function(){
+        if($('#exitGame').length()>0){
+            fetch("/exit").done();
+        }
+
+    };
+
     //keep session alive every 2 minutes
     setInterval(function(){
         fetch("/").done();

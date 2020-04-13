@@ -25,101 +25,66 @@ class SitePageController extends AbstractController
      * Homepage
      * @Route("/", name="home")
      * @param GameService $gameService
-     * @param SessionService $session
      * @return Response
      * @throws \Exception
      */
-    public function home(GameService $gameService, SessionService $session)
+    public function home(GameService $gameService)
     {
-        //if game already joint
-        $game=null;
-        if(!is_null($session->get("gameUniqueId"))){
-            $game= $gameService->joinGame($session->get("gameUniqueId"))  ;
-        }
-        return $this->render('home/index.html.twig', ["game"=>$game]);
+        $game = $gameService->getCurrentGame();
+        return $this->render('home/index.html.twig', ["game" => $game]);
     }
 
     /**
      * Game page
      * @Route("/game/{uniqueId}", name="game", defaults={"uniqueId" = null})
      * @param GameService $gameService
-     * @param SessionService $session
      * @param string|null $uniqueId
      * @return Response
      * @throws \Exception
      */
-    public function game(GameService $gameService, SessionService $session, string $uniqueId=null)
+    public function game(GameService $gameService, string $uniqueId = null)
     {
         //if no uniqueId, create a new game
-        if(is_null($uniqueId)){
-            $session->set("playerUniqueId",null);
-            $session->set("gameUniqueId",null);
+        if (is_null($uniqueId)) {
             $game = $gameService->createGame();
-            return $this->redirectToRoute('game', ["uniqueId"=>$game->getUniqueId()]);
+            return $this->redirectToRoute('game', ["uniqueId" => $game->getUniqueId()]);
         }
 
         //if uniqueId, tying to join existing game
-        $game= $gameService->joinGame($uniqueId);
-        if(is_null($game)){
+        $game = $gameService->getGame($uniqueId);
+        if (is_null($game)) {
             $this->addFlash("error", "Cette partie n'existe pas !");
             return $this->redirectToRoute('home');
         }
-        //store joint game
-        $session->set("gameUniqueId",$game->getUniqueId());
 
-        //if unknown player
-        if(is_null($session->get("playerUniqueId")) ){
+        //if no player redirect to form player
+        $player = $gameService->getCurrentPlayer();
+        if (is_null($player)) {
             return $this->redirectToRoute('player');
         }
 
-        return $this->render('game/index.html.twig', ["game"=>$game]);
+        return $this->render('game/index.html.twig', ["game" => $game]);
     }
 
     /**
-     * JoinGame Page
-     * @Route("/player", name="player")
+     * @Route("/player", name="player" )
      * @param Request $request
-     * @param SessionService $session
+     * @param GameService $gameService
      * @return RedirectResponse|Response
      * @throws \Exception
      */
-    public function index(Request $request,SessionService $session)
+    public function player(Request $request,GameService $gameService)
     {
-        $em = $this->getDoctrine()->getManager();
-        $playerRepo= $em->getRepository(Player::class);
-        $player=null;
-        if(!is_null($session->get("playerUniqueId")) ){
-            $player=$playerRepo->findOneBy(["uniqueId"=>$session->get("playerUniqueId")]);
-        }
-        if(is_null($player)){
+        $player=$gameService->getCurrentPlayer();
+        $game=$gameService->getCurrentGame();
+        if (is_null($player)) {
             $player = new Player();
         }
         $form = $this->createForm(PlayerType::class, $player);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $player->setCreatedAt(new \DateTime());
-            $player->setUpdatedAt(new \DateTime());
-            $player->setUpdatedAt(new \DateTime());
-            $gameRepo=$em->getRepository(Game::class);
-            /**
-             * @var Game $game
-             */
-            $game=$gameRepo->findOneBy(["uniqueId"=>$session->get("gameUniqueId")]);
-            $player->setGame($game);
-
-            if(is_null($player->getAffectedCharacter())) {
-                //give a random characters
-                $charactersRepo = $em->getRepository(Character::class);
-                /**
-                 * @var Character $character
-                 */
-                $character = $charactersRepo->findOneByRand();
-                $player->setAffectedCharacter($character);
-            }
-            $em->persist($player);
-            $em->flush();
-            $session->set("playerUniqueId",$player->getUniqueId());
+            $gameService->createPlayer($player->getName(),$game);
             return $this->redirectToRoute('game', array('uniqueId' => $game->getUniqueId()));
         }
 
@@ -143,28 +108,14 @@ class SitePageController extends AbstractController
         ]);
     }
 
-
     /**
-     * Reset session (for dev only)
-     * @Route("/reset", name="session_reset")
      * @param GameService $gameService
-     * @param SessionService $session
-     * @return Response
-     * @throws \Exception
+     * @Route("/exit", name="exit")
+     * @return RedirectResponse
      */
-    public function reset(GameService $gameService, SessionService $session)
+    public function exit(GameService $gameService)
     {
-        $em = $this->getDoctrine()->getManager();
-        $playerRepo= $em->getRepository(Player::class);
-        $player=null;
-        if(!is_null($session->get("playerUniqueId")) ){
-            $player=$playerRepo->findOneBy(["uniqueId"=>$session->get("playerUniqueId")]);
-            $em->remove($player);
-            $em->flush();
-        }
-
-        $session->set("playerUniqueId",null);
-        $session->set("gameUniqueId",null);
+        $gameService->exitGame();
         return $this->redirectToRoute('home');
     }
 
