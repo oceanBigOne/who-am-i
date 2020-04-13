@@ -4,13 +4,13 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <h4>Nouveau joueur</h4>
+                <h4>Nom de joueur :</h4>
             </div>
         </div>
         {{ form_start(form, {'attr':{'novalidate': 'novalidate'},'action': path('player'), 'method': 'post'}) }}
         <div class="row ">
             <div class="col-12 col-md-6 col-lg-4">
-                <label for="{{ form.name.vars.id }}">Nom :</label>
+                {#<label for="{{ form.name.vars.id }}">Nom :</label>#}
                 {{ form_widget(form.name, {'attr': {'class': (form.name.vars.errors[0].message is defined)?'is-invalid form-control':'form-control','placeholder': "Votre nom de joueur"}}) }}
                 {% if form.name.vars.errors[0] is defined %}
                     <div class="invalid-feedback">

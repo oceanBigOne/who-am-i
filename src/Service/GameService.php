@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Entity\Character;
 use App\Entity\Game;
 use App\Entity\Player;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 
 class GameService
@@ -120,6 +121,20 @@ class GameService
         }
 
         return $player;
+    }
+
+    /**
+     * @param Game $game
+     * @return Collection|[]
+     */
+    public function getPlayersInGame(Game $game):?array{
+        $players=null;
+        if(!is_null($game)){
+            $playerRepo= $this->em->getRepository(Player::class);
+            /**@var Player $player **/
+            $players = $playerRepo->findBy(["game"=>$game]);
+        }
+        return $players;
     }
 
 

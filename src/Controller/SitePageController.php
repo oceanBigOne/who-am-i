@@ -84,8 +84,18 @@ class SitePageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $gameService->createPlayer($player->getName(),$game);
-            return $this->redirectToRoute('game', array('uniqueId' => $game->getUniqueId()));
+            $playersInGame=$gameService->getPlayersInGame($game);
+            $playersName=[];
+            foreach($playersInGame as $playerInGame){
+                $playersName[]=mb_strtolower($playerInGame->getName());
+            }
+            if(in_array(mb_strtolower($player->getName()),$playersName)){
+                $this->addFlash('error', "Ce nom est déjà utilisé !");
+            }else{
+                $gameService->createPlayer($player->getName(),$game);
+                return $this->redirectToRoute('game', array('uniqueId' => $game->getUniqueId()));
+            }
+
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {

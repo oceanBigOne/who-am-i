@@ -5,7 +5,7 @@
 <input type="hidden" value="game-page" id="gamePage" />
             <div class="row mb-1">
                 <div class="col-12 col-md-6 col-lg-4 m-auto text-center">
-                    <h4>JOUEURS</h4>
+                    <h4>NOMBRE DE JOUEURS : {{ game.players|length }}</h4>
                 </div>
             </div>
         <div class="row mb-4">
@@ -19,7 +19,7 @@
                     <div class="col-12 col-md-6 col-lg-4 mb-2">
                         <div class="card card-primary w-100">
                             <div class="card-header  {% if player.uniqueId == session.get("playerUniqueId") %}bg-secondary{% else %}bg-primary{% endif %} text-white">
-                                <i class="fas fa-user-alt mr-2"></i>{{ player.name }}
+                                <b>{{ loop.index }}</b>)<i class="fas fa-user-alt ml-2 mr-2"></i>{{ player.name }}
                             </div>
                             <div class="card-content p-4">
                                 {% if player.uniqueId == session.get("playerUniqueId") %}
