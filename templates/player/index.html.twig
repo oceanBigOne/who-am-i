@@ -3,13 +3,16 @@
 {% block body %}
     <div class="container mt-5">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-center mb-5"><h1>QUI SUIS JE ?</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-12 offset-md-3 col-md-6 offset-lg-4 col-lg-4">
                 <h4>Nom de joueur :</h4>
             </div>
         </div>
         {{ form_start(form, {'attr':{'novalidate': 'novalidate'},'action': path('player'), 'method': 'post'}) }}
         <div class="row ">
-            <div class="col-12 col-md-6 col-lg-4">
+            <div class="col-12 offset-md-3 col-md-6 offset-lg-4 col-lg-4">
                 {#<label for="{{ form.name.vars.id }}">Nom :</label>#}
                 {{ form_widget(form.name, {'attr': {'class': (form.name.vars.errors[0].message is defined)?'is-invalid form-control':'form-control','placeholder': "Votre nom de joueur"}}) }}
                 {% if form.name.vars.errors[0] is defined %}
@@ -20,11 +23,16 @@
             </div>
         </div>
         <div class="row mt-2">
-            <div class="col-12 col-md-6 col-lg-4">
+            <div class="col-12 offset-md-3 col-md-6 offset-lg-4 col-lg-4">
                 <button type="submit"  class="btn btn-success  float-right mb-1">Valider</button>
                 <a href="{{ path('home') }}" class="btn  btn-secondary mb-1">Retour</a>
             </div>
         </div>
         {{ form_end(form) }}
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 m-auto">
+                <p>&nbsp;</p>
+            </div>
+        </div>
     </div>
 {% endblock %}

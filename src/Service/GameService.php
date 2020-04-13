@@ -172,4 +172,12 @@ class GameService
     }
 
 
+    public function getAllCharacters(){
+
+        $charactersRepo= $this->em->getRepository(Character::class);
+
+        return $charactersRepo->findAll();
+    }
+
+
 }

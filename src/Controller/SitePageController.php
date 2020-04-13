@@ -31,7 +31,9 @@ class SitePageController extends AbstractController
     public function home(GameService $gameService)
     {
         $game = $gameService->getCurrentGame();
-        return $this->render('home/index.html.twig', ["game" => $game]);
+        $characters = $gameService->getAllCharacters();
+
+        return $this->render('home/index.html.twig', ["game" => $game,'characters'=>$characters]);
     }
 
     /**

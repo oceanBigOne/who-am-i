@@ -3,13 +3,56 @@
 {% block body %}
     <div class="container mt-5">
         <div class="row">
+            <div class="col-12 text-center">
+                <h3>Règles du jeu</h3>
+            </div>
+        </div>
+        <div class="row mt-5">
             <div class="col-12">
-                <h4>Règles du jeu</h4>
+                <h5 class="bold text-primary">C'est quoi ce jeu ?</h5>
+                <hr />
+                <p>C'est le principe du "Qui suis-je ?" que l'on peut jouer entre amis en se collant simplement un post-it sur le front avec le nom d'un personnage.
+                    Chaque participant doit ensuite essayer de deviner le nom du personnage qu'il a sur le front en interrogeant les autres joueurs. </p>
+                <h5 class="bold text-primary mt-5">Pourquoi ce site ?</h5>
+                <hr />
+                <p>L'idée est simplement de permettre à des personnes de jouer au jeu du "Qui suis-je ?" lors d'une webconférence (Skype, Messenger, Zoom ou autre...)</p>
+                <h5 class="bold text-primary mt-5">Comment on joue ?</h5>
+                <hr />
+                <p>Un joueur se rend sur l'accueil du site et créer une partie. Il saisit son nom puis arrive sur une page de jeu.
+                Il partage ensuite le lien aux joueurs qu'il souhaite inviter.
+                Il suffit de cliquer sur le bouton "rafraichir" pour voir les autres joueurs connectés.</p>
+                <p>A noter : il n'est pas possible de rejoindre plusieurs parties en même temps.</p>
+                <h5 class="bold text-primary mt-5">C'est quoi les règles ?</h5>
+                <hr />
+                <p>Vous faites un peu comme vous voulez, hein. Mais l'idée c'est de jouer chacun son tour (dans l'ordre des numéros de joueurs).</p>
+                <p>A chaque tour, le joueur peut :</p>
+                <p>
+                <ul><li>Soit poser une <b>question</b> sur son personnage dont la réponse peut-être formulée par <b>OUI par NON</b></li>
+                    <li>Soit proposer le nom du personnage qu'il pense avoir trouvé</li></ul>
+                </p>
+                <p><b>ET C'EST L'UN OU L'AUTRE ...</b> on balance pas le nom immédiatement après avoir posé sa question !</p>
+                <p>Le premier joueur qui trouve son personnage a gagné.</p>
+                <h5 class="bold text-primary mt-5">Qu'est ce que vous faites avec mes données personnelles ?</h5>
+                <hr />
+                <p><b>Ce site n'a aucun objectif commercial ou politique, il est (et restera) toujours gratuit, sans publicité et confidentiel (sans divulgation d'informations à des tiers).</b></p>
+                <p>En dehors d'une éventuelle opération de maintenance par un technicien (moi même), personne n'accède aux données du jeu (pas d'analyse ou de statistiques).</p>
+                <p>Il n'y a ni google analytics, ni facebook machin chose sur ce site...</p>
+                <p>Rien n'est conservé en dehors de vos <u>noms de joueurs</u>, je vous recommande donc d'utiliser des pseudos si vous souhaitez un anonymat parfait.</p>
+
+                <h5 class="bold text-primary mt-5">J'ai des questions ?</h5>
+                <hr />
+                <p>Ce projet est Open-source, vous pouvez me contacter et étudier ou participer au développement de ce projet <a href="https://github.com/oceanBigOne/who-am-i" target="_blank">via github</a></p>
+
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-center">
                 <a href="{{ path('home') }}" class="btn btn-secondary">Retour</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 m-auto">
+                <p>&nbsp;</p>
             </div>
         </div>
     </div>

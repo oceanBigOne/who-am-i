@@ -1,21 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-<input type="hidden" value="game-page" id="gamePage" />
-            <div class="row mb-1">
-                <div class="col-12 col-md-6 col-lg-4 m-auto text-center">
-                    <h4>NOMBRE DE JOUEURS : {{ game.players|length }}</h4>
+    <div class="container mt-5">
+        <input type="hidden" value="game-page" id="gamePage"/>
+<div class="row">
+    <div class="col-12 text-center"><h1>QUI SUIS JE ?</h1></div>
+</div>
+        <div class="row mt-5 mb-1">
+            <div class="col-12 col-md-6 col-lg-4">
+                <h4 class="mt-2">NOMBRE DE JOUEURS : {{ game.players|length }}</h4>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="input-group  mt-2">
+                    <input type="text" class="form-control form-control-sm autoselect" id="url"
+                           value="{{ app.request.getSchemeAndHttpHost() }}{{ path('game',{uniqueId:session.get("gameUniqueId")}) }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-secondary copy-to-clipboard" data-target="#url" type="button"><i
+                                    class="fas fa-copy mr-2"></i> Inviter des joueurs
+                        </button>
+                    </div>
                 </div>
             </div>
+            <div class="col-12 col-lg-4">
+                <button
+                   class="btn btn-block btn-sm btn-success mt-2 jsForceRefresh"><i
+                            class="fas fa-sync"></i> Rafraîchir la liste des joueurs</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="row mb-4">
             <div class="col-12 col-md-6 col-lg-4 m-auto text-center">
-                <a href="{{ path('game',{uniqueId:session.get("gameUniqueId")})}}" class="btn btn-success m-auto"><i class="fas fa-sync"></i></a>
             </div>
         </div>
         <div class="row mb-4">
+            {% set defaultsPlayer=12 %}
             {% if game is not null %}
-                {%for player in game.players %}
+                {% for player in game.players %}
+                    {% set defaultsPlayer=defaultsPlayer-1 %}
                     <div class="col-12 col-md-6 col-lg-4 mb-2">
                         <div class="card card-primary w-100">
                             <div class="card-header  {% if player.uniqueId == session.get("playerUniqueId") %}bg-secondary{% else %}bg-primary{% endif %} text-white">
@@ -31,14 +53,39 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% if defaultsPlayer>0 %}
+                    {% for i in 1.. defaultsPlayer %}
+                        <div class="col-12 col-md-6 col-lg-4 mb-2">
+                            <div class="card w-100">
+                                <div class="card-header text-white" style="background-color: #eee;">
+                                    <span style="color:#999;">Emplacement libre ...</span>
+                                </div>
+                                <div class="card-content p-4">
+                                    <span style="color:#999;">&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
         </div>
-            <div class="row ">
-                <div class="col-12 col-md-6 col-lg-4 m-auto">
-                    <a href="{{ path('exit') }}" class="btn btn-primary btn-block">Quitter la partie</a>
-                </div>
-            </div>
-
     </div>
+    <div class="container mt-5">
+        <div class="row mt-5 mb-1">
+            <div class="col-12 col-md-6 col-lg-4">
+                &nbsp;
+            </div>
+            <div class="offset-lg-4 col-lg-4">
+                <a href="{{ path('exit') }}" class="btn btn-block btn-sm btn-secondary"><i class="fas fa-door-open"></i>
+                    Quitter la partie</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 m-auto">
+                <p>&nbsp;</p>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}
